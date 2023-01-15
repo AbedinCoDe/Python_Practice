@@ -1,15 +1,83 @@
 #Step 1
 
+# Hangman art here
+Present_stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+logo = ''' 
+ _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                    __/ |                      
+                   |___/    '''
+
 import random
+
 word_list = ["aardvark", "baboon", "camel"]
 
-# TODO-1 - Randomly choose a word from the word_list and assign it to a variable called chosen_word.
+
 chosen_word = random.choice(word_list)
 
 print(f"Chosen word is: {chosen_word}")
 
-# TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
-guess = input("Guess a latter: \n").lower()
+end_of_game = False
 
 list1 = []
 word_length = len(chosen_word)
@@ -17,12 +85,17 @@ word_length = len(chosen_word)
 for letter in range(word_length):
     list1 += "_"
 
+while not end_of_game:
+    guess = input("Guess Your latter: \n").lower()
 
-# TODO-3 - Check if the letter the user guessed (guess) is one of the letters in the chosen_word.
+    for position in range(word_length):
+        letter = chosen_word[position]
+        if letter == guess:
+            list1[position] = letter
+    print(list1)
 
-for position in range(word_length):
-    letter = chosen_word[position]
-    if letter == guess:
-        list1[position] = letter
+    if "_" not in list1:
+        end_of_game = True
+        print("You Win!!")
 
 
